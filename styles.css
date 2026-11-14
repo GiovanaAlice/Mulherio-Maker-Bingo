@@ -1,0 +1,296 @@
+/* ==========================================================================
+   THEME — MulheRio Maker (Clube / Rio Maker Space)
+   Hot pink + neon lime on near-black, warm white cards.
+   Swap these variables to retune the whole page.
+   ========================================================================== */
+:root {
+  --color-bg: #0f0e0f;
+  --color-pink: #fa3e5f;
+  --color-lime: #c9f25d;
+  --color-surface: #fdfaf2;      /* warm white card */
+  --color-surface-alt: #232124;  /* dark chip on black */
+  --color-text: #f4efe6;
+  --color-text-muted: #9c9691;
+  --color-ink: #171519;          /* text on light surfaces */
+
+  --color-accent: var(--color-lime);
+  --color-accent-text: #0f0e0f;
+  --color-drawn: var(--color-lime);
+  --color-drawn-text: #0f0e0f;
+  --color-danger: var(--color-pink);
+
+  --radius: 16px;
+  --font: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Shrikhand", "Rubik", cursive;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Decorative pink blobs, like the poster corners ------------------------ */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 45vmax;
+  height: 30vmax;
+  background: var(--color-pink);
+  z-index: -1;
+}
+
+body::before {
+  top: -18vmax;
+  left: -14vmax;
+  border-radius: 0 0 100% 40% / 0 0 100% 70%;
+  transform: rotate(8deg);
+}
+
+body::after {
+  bottom: -18vmax;
+  right: -14vmax;
+  border-radius: 100% 40% 0 0 / 100% 70% 0 0;
+  transform: rotate(8deg);
+}
+
+.caller {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+/* Header ---------------------------------------------------------------- */
+.caller__header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.caller__kicker {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-lime);
+}
+
+.caller__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 8vw, 3.2rem);
+  line-height: 1.05;
+  color: var(--color-lime);
+  text-shadow:
+    3px 3px 0 var(--color-pink),
+    6px 6px 0 rgba(0, 0, 0, 0.6);
+}
+
+.caller__subtitle {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Sparkles ✦ ------------------------------------------------------------ */
+.spark {
+  position: absolute;
+  color: var(--color-lime);
+  font-size: 1.1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.spark--1 { top: -0.4rem; left: 12%; }
+.spark--2 { top: 1.4rem; right: 14%; font-size: 0.8rem; }
+.spark--3 { bottom: -0.8rem; left: 22%; font-size: 0.7rem; color: var(--color-pink); }
+
+/* Current draw ---------------------------------------------------------- */
+.current {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border-radius: var(--radius);
+  padding: 2.5rem 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.current__letter {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--color-pink);
+}
+
+.current__number {
+  font-size: 5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+
+.current__hint {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #8d877f;
+}
+
+kbd {
+  background: #ece7db;
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-family: inherit;
+}
+
+/* Controls -------------------------------------------------------------- */
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  font: inherit;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  transition: transform 0.06s ease;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn--primary {
+  flex: 1;
+  background: var(--color-lime);
+  color: var(--color-accent-text);
+  box-shadow: 0 4px 0 var(--color-pink);
+}
+
+.btn--primary:active { box-shadow: 0 1px 0 var(--color-pink); }
+
+.btn--danger {
+  background: transparent;
+  color: var(--color-pink);
+  border: 2px solid var(--color-pink);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Options --------------------------------------------------------------- */
+.options {
+  margin-bottom: 1.5rem;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input {
+  accent-color: var(--color-lime);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+/* Hide every letter (current draw + recent list) when option is off */
+body.hide-letters .current__letter,
+body.hide-letters .recent__list .letter {
+  display: none;
+}
+
+/* Recent draws ---------------------------------------------------------- */
+.recent h2,
+.board h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  margin: 0 0 0.5rem;
+}
+
+.recent__list {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  min-height: 2.5rem;
+}
+
+.recent__list li {
+  background: var(--color-surface-alt);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.recent__list li .letter {
+  color: var(--color-pink);
+  margin-right: 0.35rem;
+}
+
+/* Board ----------------------------------------------------------------- */
+.board__grid {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  gap: 4px;
+}
+
+.board__cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-alt);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+}
+
+.board__cell--hit {
+  background: var(--color-drawn);
+  color: var(--color-drawn-text);
+  font-weight: 700;
+}
+
+/* Row headers B/I/N/G/O are implicit in the grid layout;
+   the number range determines the letter (see app.js). */
+
+@media (max-width: 480px) {
+  .current__letter { font-size: 2.6rem; }
+  .current__number { font-size: 3.5rem; }
+  .board__cell { font-size: 0.6rem; }
+}
